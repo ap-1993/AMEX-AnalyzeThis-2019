@@ -20,7 +20,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 #loading the data
 data = pd.read_csv('your path/development_dataset.csv')
 
-#looking at the dataset
+#look at the dataset
 data.head()
 
 #data pre-processing
