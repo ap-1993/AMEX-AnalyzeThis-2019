@@ -39,7 +39,6 @@ df_final[["VAR21"]].head(11)
 #train test split
 x = df_final.drop(columns = 'VAR21')
 y = df_final['VAR21']
-
 x_train,x_test,y_train,y_test = train_test_split(x,y,test_size = 0.2) 
 len(x_train)
 
