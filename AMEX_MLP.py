@@ -12,7 +12,7 @@ import tensorflow as tf
 print(tf.__version__)
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.neural_network import MLPClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.decomposition import PCA
 from __future__ import absolute_import, division, print_function, unicode_literals
@@ -43,11 +43,11 @@ x_train,x_test,y_train,y_test = train_test_split(x,y,test_size = 0.2)
 len(x_train)
 
 #fitting the model
-clf = MLPClassifier(solver='adam', alpha=1e-5, activation = 'tanh', momentum = 0.70, hidden_layer_sizes=(10,10,3), max_iter = 1000, learning_rate_init = 0.001)
-clf.fit(x_train, y_train)
+logreg = LogisticRegression()
+logreg.fit(x_train, y_train)
 
 #model accuracy score
-y_hat = clf.predict(x_test)
+y_hat = logreg.predict(x_test)
 
 print("accuracy: " + str(accuracy_score(y_test, y_hat)))
 
@@ -63,12 +63,12 @@ X_reduced = pca.fit_transform(x_train)
 X_recovered = pca.inverse_transform(X_reduced)
 
 #fitting the model on the reduced dataset
-clf_reduced = MLPClassifier(solver='sgd', alpha=1e-5, activation = 'tanh', momentum = 0.70, hidden_layer_sizes=(10,10,3), max_iter = 1000, learning_rate_init = 0.02)
-clf_reduced.fit(X_reduced, y_train)
+logreg_reduced = LogisticRegression()
+logreg_reduced.fit(X_reduced, y_train)
 
 #accuracy of reduced model
 X_test_reduced = pca.transform(x_test)
 
-y_hat_reduced = clf_reduced.predict(X_test_reduced)
+y_hat_reduced = logreg_reduced.predict(X_test_reduced)
 
 print("accuracy: " + str(accuracy_score(y_test, y_hat_reduced)))
